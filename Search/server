@@ -1,0 +1,5 @@
+<?
+ @mysql_connect("localhost", "root", "aaa") or die("無法連結主機");
+ @mysql_select_db("abcd") or die("無法連結資料庫");
+ include("unicode.php");
+?>
