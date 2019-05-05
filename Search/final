@@ -1,0 +1,43 @@
+ <html><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>接收起始筆數及總筆數</title></head><body><?
+ include("server.php");
+ include("checking.php");
+ $a1=mysql_real_escape_string($_POST['char_name']);
+ $a2=mysql_real_escape_string($_POST['attribute']);
+ echo $a2."<br>";
+ switch ($a2)
+ {
+    case sn:
+        $s_att= "Location";
+        break;
+    case brand:
+        $s_att= "Name";
+        break; 
+    case model:
+        $s_att= "Starplayer";
+        break;
+
+ } 
+ $sql1="select Location,Name,Starplayer from abcd where ".$s_att." like '%".$a1."%'";
+ echo "SQL語法為：".$sql1."<br>";//若不作測試請將此行刪除或變成註解
+ $sql = mysql_query($sql1) or die(mysql_error());
+ $rows = mysql_num_rows($sql);
+ if($rows=="")
+  echo "查無資料！";
+ else
+  echo "有 ".$rows." 筆資料喔！";
+ echo '<table border="1" ><tr>';
+ echo "<td>Location</td><td>Name</td><td>Starplayer</td>";
+ echo "</tr>";
+ while($list=mysql_fetch_array($sql))
+   {	
+	echo "<tr><td>".$list[0]."</td>";
+	echo "<td>".$list[1]."</td>";
+        echo "<td>".$list[2]."</td>";
+        echo "<td>".$list[3]."</td></tr>";
+   }
+ echo '</table>';
+ mysql_free_result($sql);
+ mysql_close(); 
+	?></body></html>
